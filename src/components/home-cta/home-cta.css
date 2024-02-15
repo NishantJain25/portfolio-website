@@ -1,0 +1,17 @@
+
+.line1alt, .line2alt{
+   visibility: hidden;
+    transition: all 0.3s cubic-bezier(.7, 0, .3, 1);
+}
+
+.line1, .line2{
+    opacity: 1;
+    transition: all 0.3s cubic-bezier(.7, 0, .3, 1);
+}
+
+.cta:hover  .line1, .cta:hover .line2, .cta:hover  .line1alt, .cta:hover .line2alt{
+    transform: translateY(-100%);
+}
+.cta:hover  .line1alt, .cta:hover .line2alt{
+ visibility: visible;
+}

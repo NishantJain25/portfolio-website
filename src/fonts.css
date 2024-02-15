@@ -1,0 +1,16 @@
+
+@font-face {
+    font-family: 'NeueMontrealMedium';
+    src: local('NeueMontrealMedium'),
+         url('./assets/fonts/NeueMontreal-Medium.otf') format('opentype');
+}
+@font-face {
+    font-family: 'NeueMontrealRegular';
+    src: local('NeueMontrealRegular'),
+         url('./assets/fonts/NeueMontreal-Regular.otf') format('opentype');
+}
+@font-face {
+    font-family: 'NeueMontrealBold';
+    src: local('NeueMontrealBold'),
+         url('./assets/fonts/NeueMontreal-Bold.otf') format('opentype');
+}
