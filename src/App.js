@@ -1,62 +1,76 @@
 import { useEffect, useRef, useState } from "react";
 import "./App.css";
-import AboutSection from "./components/about-section/about-section";
-import ContactSection from "./components/contact-section/contact-section";
-import HomeSection from "./components/home-section/home-section";
+
 import Navbar from "./components/navbar/navbar";
-import SkillsSection from "./components/skills-section/skills-section";
-import WorkSection from "./components/work-section/work-section";
+
 import { PageProvider } from "./context/pageContext";
+import { Power3, gsap } from "gsap";
+import { Outlet } from "react-router-dom";
+
+gsap.registerPlugin(Power3);
 
 function App() {
-  const [preloader, setPreloader] = useState(true);
-  const [timer, setTimer] = useState(4)
-  const timerRef = useRef(null)
-    const getQuote = () => {
-    const quotes = ['Challenge Yourself', 'Keep Learning']
-    const max = quotes.length - 1
-    const min = 0
-    const idx = Math.floor(Math.random() * (max - min +1)) + min
-    console.log(idx)
-    return quotes[idx]
-  }
-  const [quote,setQuote] = useState(getQuote)
-  
-  useEffect(() => {
-    timerRef.current = setInterval(() => setTimer((timer) => timer - 1),1000)
-    return () => clearInterval(timerRef.current)
-  },[])
+  const [preloader, setPreloader] = useState("active");
+  const [timer, setTimer] = useState(3);
+  const timerRef = useRef(null);
 
   useEffect(() => {
-    if(timer === 0){
-      clearInterval(timerRef.current)
-      setPreloader(false)
+    timerRef.current = setInterval(() => setTimer((timer) => timer - 1), 1000);
+    return () => clearInterval(timerRef.current);
+  }, []);
+
+  useEffect(() => {
+    if (timer === 0) {
+      clearInterval(timerRef.current);
+      setPreloader("closed");
     }
-  },[timer])
+  }, [timer]);
 
+  useEffect(() => {
+    const ctx = gsap.context((self) => {
+      gsap.fromTo(
+        ".closed",
+        {
+          y: 0,
+        },
+        {
+          y: "-100%",
+          duration: 1,
+          ease: Power3.easeOut,
+        }
+      );
+      gsap.fromTo(
+        ".open",
+        {
+          y: "100%",
+        },
+        {
+          y: 0,
+          duration: 1,
+          ease: Power3.easeOut,
+        }
+      );
+    });
 
+    return () => ctx.revert();
+  }, [preloader]);
 
- 
   return (
     <>
-      {preloader ? (
-        <div className="h-[100vh] w-[100vw] bg-black absolute flex justify-center items-center">
-          <div className="preloader flex items-end">
-          <h1 className="preloader-text text-white font-[NeueMontrealRegular] text-[5em]">Nishant</h1><span className="text-orange-400 dot ">.</span>
+      <PageProvider>
+        <main
+          className="hero main-container"
+          id="main-container"
+          data-scroll-container
+        >
+          <div className={`preloader ${preloader} z-50 bg-black`}>
+            <p className="text-white text-[5em] logo">N</p>
+            <span className="text-orange-400 text-[5em] logo-dot">.</span>
           </div>
-        </div>
-      ) : (
-        <PageProvider>
-        <main className="hero main-container" id="main-container" data-scroll-container>
           <Navbar />
-          <HomeSection />
-          <AboutSection />
-          <WorkSection />
-          <SkillsSection />
-          <ContactSection />
+          <Outlet setPreloader={setPreloader} />
         </main>
-        </PageProvider>
-      )}
+      </PageProvider>
     </>
   );
 }

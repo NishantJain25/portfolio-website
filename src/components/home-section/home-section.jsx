@@ -11,19 +11,17 @@ const HomeSection = () => {
   useEffect(() => {
     const titles = document.querySelectorAll('.title')
     const img = document.querySelector('.hero-image-container')
-    const tl = gsap.timeline({defaults: {duration: 1}})
+    const tl = gsap.timeline({defaults: {duration: 1, delay: 3}})
 
     tl.fromTo(
       img,
       {
-        scale: 1.5,
-        opacity: 0
+        backgroundPositionY: '100px',
       },
       {
-       scale: 1,
-        opacity:1,
+        backgroundPositionY: '50%',
         duration: 1.5,
-        ease: Power3.easeInOut
+        ease: Power3.easeOut
       },
     )
     
@@ -36,44 +34,44 @@ const HomeSection = () => {
       tl.fromTo(
         greeting,
         {
-          y: '50px',
+          y: '100px',
           opacity: 0
         },
         {
           y:0,
           opacity: 1,
-          duration: 1.5,
+          duration: 1,
           ease: Power3.easeOut
         },
-        1
+        0.5
       )
       .fromTo(
         h1,
         {
+          y: '100px',
+          opacity: 0
+        },
+        {
+          y:0,
+          opacity: 1,
+          duration: 1,
+          ease: Power3.easeOut
+        },
+        0.5
+      )
+      .fromTo(
+        cta,
+        {
           y: '50px',
           opacity: 0
         },
         {
           y:0,
           opacity: 1,
-          duration: 1.5,
+          duration: 1,
           ease: Power3.easeOut
         },
-        1.2
-      )
-      .fromTo(
-        cta,
-        {
-          y: '30px',
-          opacity: 0
-        },
-        {
-          y:0,
-          opacity: 1,
-          duration: 1.5,
-          ease: Power3.easeOut
-        },
-        1.7
+       0.5
       )
     })
     
@@ -106,8 +104,13 @@ const HomeSection = () => {
     //   e.clientY - 100
     // }px`;
   };
+  const viewCv = () => {
+    const url = `https://drive.google.com/file/d/1ytoPymznl9FUwYM2hYP64UjrK3S150g0/view?usp=drive_link`
+    window.open(url, '_blank')
+  }
   return (
     <section id="home smooth-content" className="bg-black text-white h-[100vh] md:px-16 md:py-32 lg:px-32 px-8 py-32 mx-auto relative overflow-hidden" onMouseMove={handleMouseMove} ref={containerRef} data-scroll-section>
+
       <div className="hero-image-container absolute flex justify-center items-start bg-transparent left-0 top-0 z-0">
           
       </div>
@@ -117,7 +120,7 @@ const HomeSection = () => {
           <h1 className="text-[6em] md:text-[6em] lg:text-[10em] leading-[6rem] md:leading-[12rem] font-[NeueMontrealMedium]">Nishant Jain</h1>
         </div>
         <div className="w-full flex md:flex-grow justify-between items-center text-[1em] lg:text-[2em] cursor-default">
-          <HomeCTA line1={"Fullstack"} line1alt={"View"} line2={"Developer"} line2alt={"CV"} buttonText={"Download CV"} handleMouseEnter={handleMouseEnter} handleMouseLeave={handleMouseLeave} />
+          <HomeCTA line1={"Fullstack"} line1alt={"View"} line2={"Developer"} line2alt={"CV"} buttonText={"Download CV"} handleMouseEnter={handleMouseEnter} handleMouseLeave={handleMouseLeave} onClick={viewCv}/>
           <HomeCTA line1={"I'm also a"} line1alt={"View"} line2={"Photographer!"} line2alt={"Portfolio"} buttonText={"View Portfolio"} handleMouseEnter={handleMouseEnter} handleMouseLeave={handleMouseLeave} />
         </div>
       </div>

@@ -9,6 +9,7 @@ const HomeCTA = ({
   line2alt,
   handleMouseEnter,
   handleMouseLeave,
+  onClick
 }) => {
 
   return (
@@ -18,6 +19,7 @@ const HomeCTA = ({
         handleMouseEnter(e);
       }}
       onMouseLeave={handleMouseLeave}
+      onClick = {onClick}
     >
       <div className="overflow-hidden relative text-left lg:h-[50px] h-[20px]">
         <p className={`line1 z-0 `}>{line1}</p>

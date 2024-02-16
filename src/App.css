@@ -11,54 +11,16 @@
 ::selection{
   background: rgba(251,146,60,0.9) 
 }
-
 .preloader{
+  background-color: black;
+  height: 100vh;
+  width: 100vw;
+  position: fixed;
+  top: 0;
+  left: 0;
   overflow: hidden;
-  text-align: center;
-  animation: preloaderAnimation 2.5s forwards cubic-bezier(.7, 0, .3, 1);
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-.dot{
-  transform: translate(-21px, -75px);
-  
-  font-size: 5em;
-  animation: preloaderDot 2s forwards ease;
-  animation-delay: 3s;
-}
-
-@keyframes preloaderAnimation {
-  0%{
-    transform: translateY(100%);
-    scale: 2;
-    width: 55px;
-    opacity: 0;
-  }
-  33%{
-    transform: translateY(0%);
-    scale: 2;
-    width: 55px;
-    opacity: 1;
-  }
-  66%{
-    scale: 1;
-    width: 55px;
-  }
-  100%{
-    width: 300px;
-  }
-}
-
-@keyframes preloaderDot {
-  0%{
-    transform: translate(-21px,-75px);
-  }
-  25%{
-    transform: translate(-21px, -40px);
-  }
-  50%{
-    transform: translate(-10px,-75px);
-  }
-  100%{
-    transform: translate(0,0);
-  }
-}

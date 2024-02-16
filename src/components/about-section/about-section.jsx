@@ -73,6 +73,21 @@ const AboutSection = () => {
         ` ${0.01 *index}`
         )
       })
+
+      tl.current.fromTo(
+        targetSecondary.current,
+        {
+          y: 50,
+          opacity: 0
+        },
+        {
+          y: 0,
+          opacity: 1,
+          duration: 1,
+          ease: Power3.easeOut,
+        },
+        0
+      )
       return () => ctx.revert();
     }, []);
     

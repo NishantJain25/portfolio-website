@@ -44,6 +44,11 @@ const SkillsSection = () => {
         }
       }
 
+      const viewCv = () => {
+        const url = `https://drive.google.com/file/d/1ytoPymznl9FUwYM2hYP64UjrK3S150g0/view?usp=drive_link`
+        window.open(url, '_blank')
+      }
+
       useEffect(() => {
         const ctx = gsap.context((self) => {
           tl.current = gsap
@@ -92,6 +97,7 @@ const SkillsSection = () => {
     
   
         }, trigger.current);
+
   
         targetTitle.current.forEach((el, index) => {
           tl.current.fromTo(
@@ -157,7 +163,7 @@ const SkillsSection = () => {
             })}
         </div>
         <div className="absolute right-[20px]  md:right-[50px] md:bottom-[50px] lg:right-[8rem]" ref={targetButton}>
-            <Button label={"View CV"} type="primary"/>
+            <Button label={"View CV"} type="primary" onClick={viewCv}/>
         </div>
     </section>
   )
