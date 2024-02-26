@@ -3,9 +3,13 @@ import React from "react";
 import { useEffect } from "react";
 import { useRef } from "react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { IoMdArrowBack } from "react-icons/io";
+import { IoMdArrowBack, IoMdArrowForward } from "react-icons/io";
 import "./work-section.css";
 import dopamineImg from '../../assets/images/D (2).png'
+import CollabinatorImg from '../../assets/images/Collabinator.png'
+import CandlelitImg from '../../assets/images/Candlelit.png'
+import MyweathernowImg from '../../assets/images/Myweathernow.png'
+import Divider from "../divider/divider";
 // import Button from "../button/button";
 // import { useState } from "react";
 
@@ -15,9 +19,9 @@ const WorkSection = () => {
   // const [currentItem, setCurrentItem] = useState(0);
   // const [translate, setTranslate] = useState(0);
   const itemList = [
-    { title: "CandleLit" },
-    { title: "Collabinator" },
-    { title: "Dopamine" },
+    { title: "CandleLit", img: CandlelitImg, description: "An E-commerce website for a homemade candles business." },
+    { title: "Collabinator", img: CollabinatorImg, description: "A Real-Time Collaborative Code Editor for seamless collaboration with peers and pair programming."},
+    { title: "MyWeatherNow", img: MyweathernowImg, description: "A weather app - every developer's dream project :p"},
   ];
   const trigger = useRef(null);
   const targetheading = useRef();
@@ -138,20 +142,18 @@ const WorkSection = () => {
               className={`work-item gap-2 relative`}
               ref={addItemToRef}
             >
-              <div className="work-item-exit hidden" onClick={handleProjectExit}><IoMdArrowBack  /></div>
+              
               <div
-                className={`work-item-img  bg-slate-400 hover:scale-95 duration-[800ms]`} onClick={handleProjectClick}
+                className={`work-item-img  bg-slate-400 hover:scale-[0.98] duration-[800ms]`} onClick={handleProjectClick}
               >
-                <img src={dopamineImg} />
+                <img src={item.img} />
               </div>
-              <div className="work-item-title flex flex-col md:py-4 transition-[cubic-bezier(.33,.15,.02,1)] ">
+              <div className="work-item-title flex flex-col md:py-4 ">
                 <span className="text-[2em] lg:text-[3em] p-0">
                   {item.title}
-                </span>
-              <div className="work-item-desc hidden">
-                Some description for the project.
+                </span>                
               </div>
-              </div>
+              <div className="work-item-visit text-[2em] lg:text-[3em]" onClick={handleProjectExit}><IoMdArrowForward /></div>
             </div>
           ))}
         </div>

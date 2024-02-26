@@ -29,7 +29,7 @@ function App() {
   useEffect(() => {
     const ctx = gsap.context((self) => {
       gsap.fromTo(
-        ".closed",
+        ".preloader.closed",
         {
           y: 0,
         },
@@ -40,7 +40,7 @@ function App() {
         }
       );
       gsap.fromTo(
-        ".open",
+        ".preloader.open",
         {
           y: "100%",
         },
@@ -68,7 +68,7 @@ function App() {
             <span className="text-orange-400 text-[5em] logo-dot">.</span>
           </div>
           <Navbar />
-          <Outlet setPreloader={setPreloader} />
+          <Outlet />
         </main>
       </PageProvider>
     </>
