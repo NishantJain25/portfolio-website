@@ -7,7 +7,7 @@ import { IoMdArrowBack, IoMdArrowForward } from "react-icons/io";
 import "./work-section.css";
 import dopamineImg from '../../assets/images/D (2).png'
 import CollabinatorImg from '../../assets/images/Collabinator.png'
-import CandlelitImg from '../../assets/images/Candlelit.png'
+import CandlelitImg from '../../assets/images/Screenshot 2024-02-27 162700.png'
 import MyweathernowImg from '../../assets/images/Myweathernow.png'
 import Divider from "../divider/divider";
 // import Button from "../button/button";
@@ -148,12 +148,14 @@ const WorkSection = () => {
               >
                 <img src={item.img} />
               </div>
-              <div className="work-item-title flex flex-col md:py-4 ">
+              <div className="work-item-title relative flex flex-col md:py-4 ">
                 <span className="text-[2em] lg:text-[3em] p-0">
                   {item.title}
-                </span>                
-              </div>
+                </span>    
+                <Divider />
+                {item.description}            
               <div className="work-item-visit text-[2em] lg:text-[3em]" onClick={handleProjectExit}><IoMdArrowForward /></div>
+              </div>
             </div>
           ))}
         </div>
