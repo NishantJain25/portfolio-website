@@ -7,18 +7,12 @@ const HomeCTA = ({
   line1alt,
   line2,
   line2alt,
-  handleMouseEnter,
-  handleMouseLeave,
   onClick
 }) => {
 
   return (
     <div
       className="cta flex flex-col items-start relative z-1 p-4 cursor-pointer select-none"
-      onMouseEnter={(e) => {
-        handleMouseEnter(e);
-      }}
-      onMouseLeave={handleMouseLeave}
       onClick = {onClick}
     >
       <div className="overflow-hidden relative text-left lg:h-[50px] h-[20px]">

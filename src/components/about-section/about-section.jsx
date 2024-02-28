@@ -69,6 +69,7 @@ const AboutSection = () => {
           opacity: 1,
           duration: 1,
           ease: Power3.easeOut,
+          overwrite: 'auto'
         },
         ` ${0.01 *index}`
         )
@@ -103,9 +104,9 @@ const AboutSection = () => {
               by Mukesh Patel School of Technology Management and Engineering.
         </div>
         </div>
-        <div className="absolute right-[20px]  md:right-[50px] bottom-[-20px] lg:right-[8rem]" ref={targetButton}>
+        {/* <div className="absolute right-[20px]  md:right-[50px] bottom-[-20px] lg:right-[8rem]" ref={targetButton}>
             <Button label={"About Me"} type="primary"/>
-        </div>
+        </div> */}
     </section>
   )
 }

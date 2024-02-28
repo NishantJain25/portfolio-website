@@ -3,6 +3,11 @@ import Button from '../button/button';
 import Divider from '../divider/divider';
 import { Power3, gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/all';
+import { IoLogoJavascript, IoLogoPython, IoLogoNodejs } from 'react-icons/io';
+import {BiLogoFlutter} from 'react-icons/bi'
+import { TbSql } from "react-icons/tb";
+import { FaJava, FaReact } from "react-icons/fa";
+import { SiRedux, SiNextdotjs, SiExpress, SiMongodb, SiFirebase, SiDjango, SiJavascript } from "react-icons/si";
 
 gsap.registerPlugin(ScrollTrigger, Power3)
 
@@ -17,18 +22,18 @@ const SkillsSection = () => {
     const tl2 = useRef(null)
 
     const skills = [
-        { Languages: ["JavaScript", "Python", "SQL", "Java"] },
+        { Languages: [{name:"JavaScript", icon: <SiJavascript style={{color: '#e8d44d'}}/>, }, {name: "Python", icon: <IoLogoPython style={{color: '#3d79a9'}}/>, }, {name: "SQL", icon: <TbSql style={{color: '#00b6ea'}}/>, }, {name: "Java", icon: <FaJava style={{color: '#ff9a13'}}/>, }] },
         {
           "Frameworks / Technologies": [
-            "ReactJS",
-            "Redux",
-            "NextJS",
-            "NodeJS",
-            "ExpressJS",
-            "MongoDB",
-            "Firebase",
-            "Django",
-            "Flutter",
+            {name:"ReactJS", icon:<FaReact style={{color: '#5bd3f3'}}/>, },
+            {name:"React Redux", icon:<SiRedux style={{color: '#7248b6'}}/>, },
+            {name:"NextJS", icon:<SiNextdotjs style={{color: '#000000'}}/>, },
+            {name:"NodeJS", icon:<IoLogoNodejs style={{color: '#509941'}}/>, },
+            {name:"ExpressJS", icon:<SiExpress style={{color: '#000000'}}/>, },
+            {name:"MongoDB", icon:<SiMongodb style={{color: '#12a54f'}}/>, },
+            {name:"Firebase", icon:<SiFirebase style={{color: '#f7c630'}}/>, },
+            {name:"Django", icon:<SiDjango style={{color: '#092d1f'}}/>, },
+            {name:"Flutter", icon:<BiLogoFlutter style={{color: '#2eb2ee'}}/>, },
           ],
         },
       ];
@@ -149,10 +154,10 @@ const SkillsSection = () => {
                     {obj[Object.keys(obj)].map((skill, key) => (
                       <div
                         key={key}
-                        className="skill-item py-2 px-3 border-black border-[1px] rounded-full select-none text-[1em] md:text-[1.15em]"
+                        className="skill-item flex gap-2 items-center py-2 px-3 border-black border-[1px] rounded-full select-none text-[1em] md:text-[1.15em]"
                         ref={addSkillToRef}
                       >
-                        {skill}
+                        {skill.icon}{skill.name}
                       </div>
                     ))}
                   </div>

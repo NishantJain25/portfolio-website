@@ -1,5 +1,5 @@
 import { Power3, gsap } from "gsap";
-import React from "react";
+import React, { useState } from "react";
 import { useEffect } from "react";
 import { useRef } from "react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -10,24 +10,28 @@ import CollabinatorImg from '../../assets/images/Collabinator.png'
 import CandlelitImg from '../../assets/images/Screenshot 2024-02-27 162700.png'
 import MyweathernowImg from '../../assets/images/Myweathernow.png'
 import Divider from "../divider/divider";
+import ProjectTile from "../project-tile/project-tile";
 // import Button from "../button/button";
 // import { useState } from "react";
 
 gsap.registerPlugin(ScrollTrigger, Power3);
 const WorkSection = () => {
-  // const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+  const [scale, setScale] = useState(window.innerWidth);
+  const [hover, setHover] = useState(false);
   // const [currentItem, setCurrentItem] = useState(0);
   // const [translate, setTranslate] = useState(0);
   const itemList = [
-    { title: "CandleLit", img: CandlelitImg, description: "An E-commerce website for a homemade candles business." },
-    { title: "Collabinator", img: CollabinatorImg, description: "A Real-Time Collaborative Code Editor for seamless collaboration with peers and pair programming."},
-    { title: "MyWeatherNow", img: MyweathernowImg, description: "A weather app - every developer's dream project :p"},
+    { title: "CandleLit", img: CandlelitImg, description: "An E-commerce website for a homemade candles business.", link: 'https://candleslit.netlify.app/' },
+    { title: "Collabinator", img: CollabinatorImg, description: "A Real-Time Collaborative Code Editor for seamless collaboration with peers and pair programming.", link: 'https://collabinator.vercel.app'},
+    { title: "MyWeatherNow", img: MyweathernowImg, description: "A weather app - every developer's dream project :p", link: 'https://myweathernow.vercel.app'},
   ];
   const trigger = useRef(null);
   const targetheading = useRef();
   const targetItem = useRef([]);
   const tl = useRef(null);
   const gallery = useRef(null);
+  const shapeRef = useRef(null);
 
   // const scrollGalleryForward = () => {
   //   if (currentItem === 2) {
@@ -39,22 +43,22 @@ const WorkSection = () => {
   //   else setCurrentItem((currentItem) => currentItem - 1);
   // };
 
-  const addItemToRef = (el) => {
-    if (el && !targetItem.current.includes(el)) {
-      targetItem.current.push(el);
-    }
-  };
+    // const addItemToRef = (el) => {
+    //   if (el && !targetItem.current.includes(el)) {
+    //     targetItem.current.push(el);
+    //   }
+    // };
 
-  // useEffect(() => {
-  //   window.addEventListener("resize", (e) => {
-  //     setWindowWidth(window.innerWidth);
-  //   });
+  useEffect(() => {
+    window.addEventListener("resize", (e) => {
+      setWindowWidth(window.innerWidth);
+    });
 
-  //   return () =>
-  //     window.removeEventListener("resize", (e) => {
-  //       setWindowWidth(window.innerWidth);
-  //     });
-  // }, []);
+    return () =>
+      window.removeEventListener("resize", (e) => {
+        setWindowWidth(window.innerWidth);
+      });
+  }, []);
 
   useEffect(() => {
     const ctx = gsap.context((self) => {
@@ -100,31 +104,20 @@ const WorkSection = () => {
   },[]);
 
 
-  const handleProjectClick = (e) => {
-    e.target.parentNode.classList.toggle('active')
-  }
-  const handleProjectExit = (e) => {
-    e.target.parentNode.parentNode.classList.remove('active')
-  }
+ 
 
   return (
     <section id="work" className="pt-32 pb-0" ref={trigger}>
+      <div
+        ref={shapeRef}
+        className={`hover-button scale-0 hidden fixed rounded-full bg-orange-400  border-orange-400 text-[1.25em] text-center h-[120px] w-[120px]  z-0 overflow-hidden lg:flex justify-center items-center pointer-events-none`}
+      >
+        Visit Website
+      </div>
       <div className="flex justify-between items-center md:px-16 lg:px-32 px-8">
         <h2 className="text-[3em] md:text-[5em] md:w-fit" ref={targetheading}>
           Recent Work
         </h2>
-        {/* <div className="hidden md:flex justify-between gap-4">
-          <Button
-            icon={<IoMdArrowBack />}
-            type="social"
-            onClick={scrollGalleryBackward}
-          />
-          <Button
-            icon={<IoMdArrowForward />}
-            type="social"
-            onClick={scrollGalleryForward}
-          />
-        </div> */}
       </div>
       <div className={`my-8 md:my-16 md:px-16 lg:px-32 px-8 overflow-hidden`}>
         <div
@@ -137,26 +130,8 @@ const WorkSection = () => {
           //       : `translateX(0%)`,
           // }}
         >
-          {itemList.map((item, index) => (
-            <div
-              className={`work-item gap-2 relative`}
-              ref={addItemToRef}
-            >
-              
-              <div
-                className={`work-item-img  bg-slate-400 hover:scale-[0.98] duration-[800ms]`} onClick={handleProjectClick}
-              >
-                <img src={item.img} />
-              </div>
-              <div className="work-item-title relative flex flex-col md:py-4 ">
-                <span className="text-[2em] lg:text-[3em] p-0">
-                  {item.title}
-                </span>    
-                <Divider />
-                {item.description}            
-              <div className="work-item-visit text-[2em] lg:text-[3em]" onClick={handleProjectExit}><IoMdArrowForward /></div>
-              </div>
-            </div>
+          {itemList.map(({img, title, description, link}, index) => (
+            <ProjectTile img={img} title={title} description={description} trigger={trigger} shapeRef={shapeRef} link={link}/>
           ))}
         </div>
       </div>

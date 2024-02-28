@@ -50,6 +50,7 @@
         transition: 0.5s all cubic-bezier(.92,.01,.02,1);
     }
     .hamburger-btn{
+        z-index: 100;
         transition: 0.3s all cubic-bezier(.16,.64,.58,.99);
     }
     .hamburger-btn:active{
@@ -84,7 +85,7 @@
         align-items: flex-start;
         padding: 0% 10%;
         transition: all 0.75s cubic-bezier(.7, 0, .3, 1);
-        z-index: 10;
+        z-index: 99 ;
     }
     .sidenav.closed{
         transform: translateX(100%);
@@ -102,7 +103,7 @@
     .navlinks{
         width: 100%;
         flex-direction: column;
-        gap: 10px;
+        gap: 5px;
         font-size: 2em;
         margin-top: 10px;
         margin-bottom: 64px;

@@ -4,8 +4,9 @@ import { IoMdArrowForward } from "react-icons/io";
 import "./navbar.css";
 import gsap, { Power3 } from 'gsap'
 import { useEffect } from "react";
+import { ScrollToPlugin } from "gsap/ScrollToPlugin";
 
-gsap.registerPlugin(Power3)
+gsap.registerPlugin(Power3, ScrollToPlugin)
 
 const Navbar = () => {
   const [isNavOpen, setIsNavOpen] = useState(false);
@@ -24,6 +25,11 @@ const Navbar = () => {
       setMouseY(e.clientY)
     })
   },[mouseY])
+
+  const scroll = (e) => {
+    e.preventDefault()
+    gsap.to(window, {scrollTo: '#about', duration: 1})
+  }
 
   const addLinkToRef = (el) => {
     if (el && !navlinkRef.current.includes(el)) {
@@ -93,7 +99,8 @@ const Navbar = () => {
       <div className="navbar absolute md:fixed left-0 top-0 z-10 w-full md:px-16 lg:px-32 py-4">
         <div className="navbar-container flex relative justify-between w-full font-[NeueMontrealBold] text-black px-8 py-4 rounded-full">
           <a
-            href="/"
+            id="/"
+            
             className="font-[NeueMontrealMedium] text-[1.5em] md:text-[1em]"
           >
             Nishant
@@ -102,29 +109,29 @@ const Navbar = () => {
           <nav className="nav">
             <ul className="navlinks flex gap-6">
               <li className="navlink relative">
-                <a href="/">
+                <div id="home" onClick={scroll}>
                   Home <IoMdArrowForward id="arrow" />
-                </a>
+                </div>
               </li>
               <li className="navlink relative">
-                <a href="#about">
+                <div id="about" onClick={scroll}>
                   About <IoMdArrowForward id="arrow" />
-                </a>
+                </div>
               </li>
               <li className="navlink relative">
-                <a href="#work">
+                <div id="work" onClick={scroll}>
                   Work <IoMdArrowForward id="arrow" />
-                </a>
+                </div>
               </li>
               <li className="navlink relative">
-                <a href="#skills">
+                <div id="skills" onClick={scroll}>
                   Skills <IoMdArrowForward id="arrow" />
-                </a>
+                </div>
               </li>
               <li className="navlink relative">
-                <a href="#contact">
+                <div id="contact"  onClick={scroll}>
                   Contact <IoMdArrowForward id="arrow" />
-                </a>
+                </div>
               </li>
             </ul>
           </nav>
@@ -142,29 +149,29 @@ const Navbar = () => {
           <Divider className="md:hidden" />
           <ul className="navlinks flex gap-6">
             <li className="sidenav-links navlink relative" ref={addLinkToRef}>
-              <a href="/">
+              <div id="home" onClick={scroll}>
                 Home <IoMdArrowForward id="arrow" />
-              </a>
+              </div>
             </li>
             <li className="sidenav-links navlink relative" ref={addLinkToRef}>
-              <a href="#about">
+              <div id="about" onClick={scroll}>
                 About <IoMdArrowForward id="arrow" />
-              </a>
+              </div>
             </li>
             <li className="sidenav-links navlink relative" ref={addLinkToRef}>
-              <a href="#work">
+              <div id="work" onClick={scroll}>
                 Work <IoMdArrowForward id="arrow" />
-              </a>
+              </div>
             </li>
             <li className="sidenav-links navlink relative" ref={addLinkToRef}>
-              <a href="#skills">
+              <div id="skills" onClick={scroll}>
                 Skills <IoMdArrowForward id="arrow" />
-              </a>
+              </div>
             </li>
             <li className="sidenav-links navlink relative" ref={addLinkToRef}>
-              <a href="#contact">
+              <div id="contact" onClick={scroll}>
                 Contact <IoMdArrowForward id="arrow" />
-              </a>
+              </div>
             </li>
           </ul>
         </div>
