@@ -3,10 +3,10 @@ import Button from "../button/button";
 import CustomInput from "../custom-input/custom-input";
 import { BsTwitterX, BsLinkedin, BsGithub } from "react-icons/bs";
 import { IoMdArrowForward } from "react-icons/io";
-import { Power3, gsap } from 'gsap';
-import { ScrollTrigger } from 'gsap/all';
+import { Power3, gsap } from "gsap";
+import { ScrollTrigger } from "gsap/all";
 
-gsap.registerPlugin(ScrollTrigger)
+gsap.registerPlugin(ScrollTrigger);
 
 const ContactSection = () => {
   const [formData, setFormData] = useState({
@@ -21,21 +21,21 @@ const ContactSection = () => {
     }));
   };
 
-  const trigger = useRef(null)
-  const targetheading = useRef()
-  const targetTitle = useRef([])
-  const targetSocialBtns = useRef([])
-  const tl = useRef(null)
+  const trigger = useRef(null);
+  const targetheading = useRef();
+  const targetTitle = useRef([]);
+  const targetSocialBtns = useRef([]);
+  const tl = useRef(null);
   const addTitleToRef = (el) => {
-    if(el && !targetTitle.current.includes(el)){
-      targetTitle.current.push(el)
+    if (el && !targetTitle.current.includes(el)) {
+      targetTitle.current.push(el);
     }
-  }
+  };
   const addButtonToRef = (el) => {
-    if(el && !targetSocialBtns.current.includes(el)){
-      targetSocialBtns.current.push(el)
+    if (el && !targetSocialBtns.current.includes(el)) {
+      targetSocialBtns.current.push(el);
     }
-  }
+  };
 
   useEffect(() => {
     const ctx = gsap.context((self) => {
@@ -51,50 +51,54 @@ const ContactSection = () => {
         .fromTo(
           targetheading.current,
           {
-            y:50,
-            opacity: 0
+            y: 50,
+            opacity: 0,
           },
           {
             y: 0,
             opacity: 1,
             duration: 1,
-            ease: Power3.easeOut
-          },
-          )
-
+            ease: Power3.easeOut,
+          }
+        );
     }, trigger.current);
-
 
     targetSocialBtns.current.forEach((el, index) => {
       tl.current.fromTo(
         el,
-      {
-        y: '100%',
-        opacity: 0
-      },
-      {
-        y: 0,
-        opacity: 1,
-        duration: 1,
-        ease: Power3.easeOut,
-      },
-      `${0.5 + (0.05 *index)}`
-      )
-    })
-   
+        {
+          y: "100%",
+          opacity: 0,
+        },
+        {
+          y: 0,
+          opacity: 1,
+          duration: 1,
+          ease: Power3.easeOut,
+        },
+        `${0.5 + 0.05 * index}`
+      );
+    });
+
     return () => ctx.revert();
   }, []);
   return (
     <section
       id="contact"
-      className="contact md:p-16 lg:p-32 px-8 py-32 bg-[#d3d3d3]"
+      className="relative contact md:p-16 lg:p-32 px-8 py-32 bg-[#d3d3d3]"
       data-scroll-section
       data-scroll-speed="1.5"
       ref={trigger}
     >
-      <div className="flex flex-col gap-8 lg:grid lg:grid-cols-2 h-full" data-scroll data-scroll-speed='1.5' >
+      <div
+        className="flex flex-col gap-8 lg:grid lg:grid-cols-2 h-full"
+        data-scroll
+        data-scroll-speed="1.5"
+      >
         <div className="h-full w-full flex justify-start lg:items-center items-start">
-        <h1 className="text-[3em] md:text-[5em]" ref={targetheading}>Let's get in touch</h1>
+          <h1 className="text-[3em] md:text-[5em]" ref={targetheading}>
+            Let's get in touch
+          </h1>
         </div>
         <div className="right flex flex-col gap-2 lg:items-end justify-center ">
           <div id="form" className="lg:w-[75%]">
@@ -132,28 +136,47 @@ const ContactSection = () => {
               />
               <Button
                 label={"Send Email"}
-                icon={<IoMdArrowForward style={{rotate: '-45deg'}}/>}
+                icon={<IoMdArrowForward style={{ rotate: "-45deg" }} />}
                 type="secondary"
                 onClick={() => {}}
               />
             </form>
           </div>
           <div className="lg:w-[75%] h-[1px] bg-gray-500 my-4"></div>
-          <div id="cta" className="flex flex-row gap-4 lg:w-[75%] justify-between items-center lg:items-center">
-            <span className="text-[1.5em] md:text-[3em]" id="social-title" ref={addTitleToRef}>Socials</span>
+          <div
+            id="cta"
+            className="flex flex-row gap-4 lg:w-[75%] justify-between items-center lg:items-center"
+          >
+            <span
+              className="text-[1.5em] md:text-[3em]"
+              id="social-title"
+              ref={addTitleToRef}
+            >
+              Socials
+            </span>
             <div className="flex flex-wrap gap-2 w-full justify-end items-center lg:justify-end">
               <div ref={addButtonToRef}>
-                <Button icon={<BsTwitterX />} type="social"/>
+                <Button icon={<BsTwitterX />} type="social" />
               </div>
               <div ref={addButtonToRef}>
-                <Button icon={<BsLinkedin />} type={"social"}/>
+                <Button icon={<BsLinkedin />} type={"social"} />
               </div>
               <div ref={addButtonToRef}>
-                <Button icon={<BsGithub />} type={"social"}/>
+                <Button icon={<BsGithub />} type={"social"} />
               </div>
             </div>
           </div>
         </div>
+      </div>
+      <div className="footer flex px- w-full justify-between items-center absolute left-0 bottom-0 md:px-16 lg:px-32 px-8 py-4 border-t-[1px] border-black">
+        <a
+          id="/"
+          className="font-[NeueMontrealMedium] text-[1.5em] md:text-[1em]"
+        >
+          Nishant
+          <span className="text-orange-400 font-[NeueMontrealBold]"> .</span>
+        </a>
+        <p>2024</p>
       </div>
     </section>
   );

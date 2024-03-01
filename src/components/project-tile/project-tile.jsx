@@ -52,6 +52,7 @@ const ProjectTile = ({ img, title, description, trigger, shapeRef, link }) => {
    
     gsap.to(shapeRef.current,{
         scale: 1,
+        duration: 0.5,
         ease: Power3.easeOut
     })
     // setScale(1)
@@ -70,6 +71,8 @@ const ProjectTile = ({ img, title, description, trigger, shapeRef, link }) => {
     // setScale(0)
     gsap.to(shapeRef.current,{
         scale: 0,
+        duration: 0.3,
+        ease: Power3.easeOut
     })
  
   };

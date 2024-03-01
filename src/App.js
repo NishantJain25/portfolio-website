@@ -11,7 +11,7 @@ gsap.registerPlugin(Power3);
 
 function App() {
   const [preloader, setPreloader] = useState("active");
-  const [timer, setTimer] = useState(3);
+  const [timer, setTimer] = useState(2);
   const timerRef = useRef(null);
 
   useEffect(() => {
@@ -20,7 +20,7 @@ function App() {
   }, []);
 
   useEffect(() => {
-    if (timer === 0) {
+    if (timer <= 0) {
       clearInterval(timerRef.current);
       setPreloader("closed");
     }
@@ -36,9 +36,12 @@ function App() {
         {
           y: "-100%",
           duration: 1,
+          delay: 1,
           ease: Power3.easeOut,
-        }
+        },
       );
+      
+      
       gsap.fromTo(
         ".preloader.open",
         {
@@ -50,6 +53,48 @@ function App() {
           ease: Power3.easeOut,
         }
       );
+      if(preloader == 'active'){
+
+        
+        gsap.fromTo(
+          ".logo, .logo-dot",
+          {
+          scale: 0.95,
+           opacity: 0,
+          },
+          {
+            scale: 1,
+            opacity: 1,
+            duration: 1,
+            ease: Power3.easeInOut,
+          },
+          );
+        gsap.fromTo(
+          ".logo",
+          {
+            width: '260px',
+          },
+          {
+            width: '50px',
+            duration: 1,
+            delay: 1,
+            ease: Power3.easeInOut,
+          },
+          );
+        }else if(preloader == 'closed'){
+          gsap.fromTo(
+            ".logo, .logo-dot",
+            {
+              y: 0,
+            },
+            {
+              y: "-200%",
+              duration: 0.5,
+              delay: 0.5,
+              ease: Power3.easeIn,
+            }
+          );
+        }
     });
 
     return () => ctx.revert();
@@ -64,7 +109,9 @@ function App() {
           data-scroll-container
         >
           <div className={`preloader ${preloader} z-50 bg-black`}>
-            <p className="text-white text-[5em] logo">N</p>
+            <div className="logo overflow-hidden w-[50px]">
+            <p className="text-white text-[5em]">Nishant</p>
+            </div>
             <span className="text-orange-400 text-[5em] logo-dot">.</span>
           </div>
           <Navbar />
