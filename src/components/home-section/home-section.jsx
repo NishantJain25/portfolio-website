@@ -1,29 +1,18 @@
-import React, { useEffect, useRef } from "react";
+import React, { forwardRef, useEffect } from "react";
 import "./home-section.css"
 import HomeCTA from "../home-cta/home-cta";
 import gsap, { Power3 } from 'gsap'
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 
-gsap.registerPlugin(Power3)
+gsap.registerPlugin(Power3, ScrollTrigger)
 
-const HomeSection = () => {
+const HomeSection = forwardRef(({setCurrentSection}, containerRef) => {
 
-  const containerRef = useRef(null);
   useEffect(() => {
     const titles = document.querySelectorAll('.title')
-    const img = document.querySelector('.hero-image-container')
+    // const img = document.querySelector('.hero-image-container')
     const tl = gsap.timeline({defaults: {duration: 1, delay: 3}})
 
-    tl.fromTo(
-      img,
-      {
-        backgroundPositionY: '100px',
-      },
-      {
-        backgroundPositionY: '50%',
-        duration: 1.5,
-        ease: Power3.easeOut
-      },
-    )
     
     titles.forEach((title, index) => {
       const greeting = title.querySelectorAll('div .greeting')
@@ -102,6 +91,6 @@ const HomeSection = () => {
       
     </section>
   );
-};
+});
 
 export default HomeSection;

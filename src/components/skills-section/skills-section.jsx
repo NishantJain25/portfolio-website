@@ -1,4 +1,4 @@
-import React, {useEffect, useRef} from 'react'
+import React, {forwardRef, useEffect, useRef} from 'react'
 import Button from '../button/button';
 import Divider from '../divider/divider';
 import { Power3, gsap } from 'gsap';
@@ -11,8 +11,7 @@ import { SiRedux, SiNextdotjs, SiExpress, SiMongodb, SiFirebase, SiDjango, SiJav
 
 gsap.registerPlugin(ScrollTrigger, Power3)
 
-const SkillsSection = () => {
-  const trigger = useRef(null)
+const SkillsSection = forwardRef(({setCurrentSection}, trigger) => {
     const targetheading = useRef()
     const targetTitle = useRef([])
     const targetSkill = useRef([])
@@ -56,6 +55,14 @@ const SkillsSection = () => {
 
       useEffect(() => {
         const ctx = gsap.context((self) => {
+
+          ScrollTrigger.create({
+            trigger: trigger.current,
+            start: "top center",
+            onEnter: () => {console.log("Enter skills") ; setCurrentSection('skills')},
+            onLeaveBack: () => {console.log("Enter work") ; setCurrentSection('work')}
+          })
+
           tl.current = gsap
             .timeline({
               scrollTrigger: {
@@ -172,6 +179,6 @@ const SkillsSection = () => {
         </div>
     </section>
   )
-}
+})
 
 export default SkillsSection

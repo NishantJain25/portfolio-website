@@ -1,4 +1,4 @@
-import { useRef, useState, useEffect } from "react";
+import { useRef, useState, useEffect, forwardRef } from "react";
 import Button from "../button/button";
 import CustomInput from "../custom-input/custom-input";
 import { BsTwitterX, BsLinkedin, BsGithub } from "react-icons/bs";
@@ -8,7 +8,7 @@ import { ScrollTrigger } from "gsap/all";
 
 gsap.registerPlugin(ScrollTrigger);
 
-const ContactSection = () => {
+const ContactSection = forwardRef(({setCurrentSection}, trigger) => {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -21,7 +21,6 @@ const ContactSection = () => {
     }));
   };
 
-  const trigger = useRef(null);
   const targetheading = useRef();
   const targetTitle = useRef([]);
   const targetSocialBtns = useRef([]);
@@ -39,6 +38,14 @@ const ContactSection = () => {
 
   useEffect(() => {
     const ctx = gsap.context((self) => {
+
+      ScrollTrigger.create({
+        trigger: trigger.current,
+        start: "top center",
+        onEnter: () => {console.log("Enter contact") ; setCurrentSection('contact')},
+        onLeaveBack: () => {console.log("Enter skills") ; setCurrentSection('skills')}
+      })
+
       tl.current = gsap
         .timeline({
           scrollTrigger: {
@@ -155,15 +162,15 @@ const ContactSection = () => {
               Socials
             </span>
             <div className="flex flex-wrap gap-2 w-full justify-end items-center lg:justify-end">
-              <div ref={addButtonToRef}>
-                <Button icon={<BsTwitterX />} type="social" />
-              </div>
-              <div ref={addButtonToRef}>
+              <a ref={addButtonToRef} href="https://www.linkedin.com/in/nishantdjain/">
                 <Button icon={<BsLinkedin />} type={"social"} />
-              </div>
-              <div ref={addButtonToRef}>
+              </a>
+              <a ref={addButtonToRef} href="https://github.com/NishantJain25">
                 <Button icon={<BsGithub />} type={"social"} />
-              </div>
+              </a>
+              <a ref={addButtonToRef} href="https://twitter.com/Nishant250300">
+                <Button icon={<BsTwitterX />} type="social" />
+              </a>
             </div>
           </div>
         </div>
@@ -171,7 +178,7 @@ const ContactSection = () => {
       <div className="footer flex px- w-full justify-between items-center absolute left-0 bottom-0 md:px-16 lg:px-32 px-8 py-4 border-t-[1px] border-black">
         <a
           id="/"
-          className="font-[NeueMontrealMedium] text-[1.5em] md:text-[1em]"
+          className="font-[NeueMontrealMedium] text-[1em]"
         >
           Nishant
           <span className="text-orange-400 font-[NeueMontrealBold]"> .</span>
@@ -180,6 +187,6 @@ const ContactSection = () => {
       </div>
     </section>
   );
-};
+});
 
 export default ContactSection;

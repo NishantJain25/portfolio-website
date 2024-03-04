@@ -55,13 +55,7 @@ const ProjectTile = ({ img, title, description, trigger, shapeRef, link }) => {
         duration: 0.5,
         ease: Power3.easeOut
     })
-    // setScale(1)
-    // shapeRef.current.style.left = `${
-    //   e.clientX - targetItem.current.getClientRects()[0].x - 75
-    // }px`;
-    // shapeRef.current.style.top = `${
-    //   e.clientY - targetItem.current.getClientRects()[0].y - 75
-    // }px`;
+   
 
     console.log(shapeRef.current.style.left);
   };
@@ -92,8 +86,8 @@ const ProjectTile = ({ img, title, description, trigger, shapeRef, link }) => {
   };
 
   return (
-        <a href={link}>
-    <div className={`work-item gap-2 relative`} ref={targetItem} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} >
+        <a href={link}  onMouseLeave={handleMouseLeave}>
+    <div className={`work-item gap-2 relative`} ref={targetItem} onMouseEnter={handleMouseEnter} >
       <div
         className={`work-item-img  bg-slate-400 hover:scale-[0.95] duration-[800ms]`}
       >

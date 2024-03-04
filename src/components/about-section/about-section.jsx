@@ -1,4 +1,4 @@
-import React, { useRef } from 'react'
+import React, { forwardRef, useRef } from 'react'
 import Button from '../button/button'
 import gsap, { Power3 } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
@@ -6,9 +6,8 @@ import { useEffect } from 'react'
 
 gsap.registerPlugin(Power3, ScrollTrigger)
 
-const AboutSection = () => {
+const AboutSection = forwardRef(({setCurrentSection}, trigger) => {
 
-    const trigger = useRef(null)
     const targetMain = useRef([])
     const targetSecondary = useRef()
     const targetButton = useRef()
@@ -23,6 +22,12 @@ const AboutSection = () => {
     console.log(aboutText.split(" "))
     useEffect(() => {
       const ctx = gsap.context((self) => {
+        ScrollTrigger.create({
+          trigger: trigger.current,
+          start: "top center",
+          onEnter: () => {console.log("Enter about") ; setCurrentSection('about')},
+          onLeaveBack: () => {console.log("Enter home") ; setCurrentSection('home')}
+        })
         tl.current = gsap
           .timeline({
             scrollTrigger: {
@@ -109,6 +114,6 @@ const AboutSection = () => {
         </div> */}
     </section>
   )
-}
+})
 
 export default AboutSection
