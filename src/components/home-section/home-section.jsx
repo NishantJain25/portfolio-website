@@ -69,7 +69,7 @@ const HomeSection = forwardRef(({setCurrentSection}, containerRef) => {
 
   
   const viewCv = () => {
-    const url = `https://drive.google.com/file/d/1ytoPymznl9FUwYM2hYP64UjrK3S150g0/view?usp=drive_link`
+    const url = `https://drive.google.com/file/d/1zRlCLFG27MdemoYcKG_Q3Z93jkOXCng9/view?usp=sharing`
     window.open(url, '_blank')
   }
   return (
